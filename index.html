@@ -72,13 +72,22 @@
               <table id="tabel-kamus" class="table table-stripped table-hover table-bordered">
                 <thead>
                   <tr>
+                    <td></td>
+                    <td>
+                      <input type="text" class="form-control" name="search-word" id="search-word">
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
                     <th>#</th>
                     <th>Kata</th>
                     <th>Definisi</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
-                <tbody id="tbody"></tbody>
+                <tbody id="tbody">
+                </tbody>
               </table>
             </div>
           </div>
@@ -319,7 +328,16 @@
             });
           }
           $(document).ready(function () {
-              $('#tabel-kamus').DataTable();
+              const table = $('#tabel-kamus').DataTable();
+
+              $('#search-word').on('change', function(){
+    
+                table
+                .column(1)
+                .search(this.value)
+                .draw();
+
+              });
           });
         }).catch((err) => {
           console.log( err );
